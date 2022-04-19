@@ -4,5 +4,5 @@
   - [AT 模式](dbpack_at.md)
   - [TCC 模式](dbpack_tcc.md)
   - [samples](distributed_transaction_samples.md)
-- 读写分离
+- [读写分离](read_write_splitting.md)
 
