@@ -7,7 +7,7 @@
 通过 Git Clone 代码到你的本地文件夹：
 
 ```
-git clone 
+git clone git@github.com:cectc/dbpack.git
 ```
 
 确保 Git 已经安装到你的开发环境，并设置好 `PATH` 环境变量。
