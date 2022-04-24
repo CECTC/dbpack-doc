@@ -11,7 +11,7 @@
 + 将 `XID` 用 `Hint` 的的方式，添加到要执行的 SQL 语句中。例如：
 
   ```sql
-  INSERT /*+ XID('%s') */ INTO seata_order.so_master (sysno, so_id, buyer_user_sysno, seller_company_code, receive_division_sysno, receive_address, receive_zip, receive_contact, receive_contact_phone, stock_sysno, payment_type, so_amt, status, order_date, appid, memo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)
+  INSERT /*+ XID('%s') */ INTO order.so_master (sysno, so_id, buyer_user_sysno, seller_company_code, receive_division_sysno, receive_address, receive_zip, receive_contact, receive_contact_phone, stock_sysno, payment_type, so_amt, status, order_date, appid, memo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)
   ```
 
 + 执行业务 SQL。
@@ -25,7 +25,7 @@
 + 将 `XID` 用 `Hint` 的的方式，添加到要执行的 SQL 语句中。例如：
 
   ```sql
-  update /*+ XID('%s') */ seata_product.inventory set available_qty = available_qty - ?, allocated_qty = allocated_qty + ? where product_sysno = ? and available_qty >= ?
+  update /*+ XID('%s') */ product.inventory set available_qty = available_qty - ?, allocated_qty = allocated_qty + ? where product_sysno = ? and available_qty >= ?
   ```
 
 + 执行业务 SQL。
@@ -43,13 +43,13 @@
 ```sql
 session1:
     START TRANSACTION
-        INSERT /*+ XID('localhost:8092:2612341069705662465') */ INTO seata_order.so_master (sysno, so_id, buyer_user_sysno, seller_company_code, receive_division_sysno, receive_address, receive_zip, receive_contact, receive_contact_phone, stock_sysno, payment_type, so_amt, status, order_date, appid, memo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)
+        INSERT /*+ XID('localhost:8092:2612341069705662465') */ INTO order.so_master (sysno, so_id, buyer_user_sysno, seller_company_code, receive_division_sysno, receive_address, receive_zip, receive_contact, receive_contact_phone, stock_sysno, payment_type, so_amt, status, order_date, appid, memo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)
         INSERT /*+ XID('localhost:8092:2612341069705662465') */ INTO seata_order.so_item(sysno, so_sysno, product_sysno, product_name, cost_price, original_price, deal_price, quantity) VALUES (?,?,?,?,?,?,?,?)
     COMMIT
 
 session2:
     START TRANSACTION
-        UPDATE /*+ XID('localhost:8092:2612341069705662465') */ seata_product.inventory set available_qty = available_qty - ?, allocated_qty = allocated_qty + ? WHERE product_sysno = ? and available_qty >= ?
+        UPDATE /*+ XID('localhost:8092:2612341069705662465') */ product.inventory set available_qty = available_qty - ?, allocated_qty = allocated_qty + ? WHERE product_sysno = ? and available_qty >= ?
     COMMIT
 ```
 
