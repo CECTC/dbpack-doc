@@ -23,3 +23,9 @@
 + Executor 执行期：负责转发 SQL 请求到后端物理 DB。
 + Filter 过滤器：负责做指标统计、SQL 拦截、敏感信息加解密等工作。
 + ConnectionFilter 数据库连接过滤器：对连接上的 SQL 拦截做处理。
+
+## 讨论群
+
+进入微信讨论群，请扫描下面的二维码，回复“进群”。
+
+<img src="./images/image-20220427091848831.png" alt="image-20220427091848831" style="zoom:50%" align="left"/>

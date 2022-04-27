@@ -1,8 +1,8 @@
 # AT 模式
 
-![distributed_transaction](./images/sc_20220418105648.gif)
+![distributed_transaction](./images/image-20220427090243209.png)
 
-+ 用户对聚合层服务发起请求后，经过 sidecar 的拦截，生成 `GlobalTransaction` 数据，并产生全局唯一标记 `XID`。
++ 请求发到聚合层服务后，在 etcd 写入全局事务数据，产生唯一标识 xid（比如：gs/aggregationSvc/2612341069705662465）。
 
 ***
 
@@ -16,7 +16,7 @@
 
 + 执行业务 SQL。
 
-+ DBPack sidecar 拦截到要执行的业务 SQL，检测 SQL 上是否是否带有 Hint 标记。如果有，则将该 SQL 执行前后的数据构造成 `UndoLog` 记录下来，并生成 `BranchTransaction` 数据。
++ DBPack sidecar 拦截到要执行的业务 SQL，检测 SQL 上是否是否带有 Hint 标记。如果有，则将该 SQL 执行前后的数据构造成 `UndoLog` 记录下来，在 etcd 写入 `BranchTransaction` 数据，并跟 xid 关联一个 key (比如：gs/aggregationSvc/2612341069705662465/${branchid})，表示 xid 下存在一个事务分支。
 
 ***
 
@@ -30,11 +30,11 @@
 
 + 执行业务 SQL。
 
-+ DBPack sidecar 拦截到要执行的业务 SQL，检测 SQL 上是否是否带有 Hint 标记。如果有，则将该 SQL 执行前后的数据构造成 `UndoLog` 记录下来，并生成 `BranchTransaction` 数据。
++ DBPack sidecar 拦截到要执行的业务 SQL，检测 SQL 上是否是否带有 Hint 标记。如果有，则将该 SQL 执行前后的数据构造成 `UndoLog` 记录下来，在 etcd 写入 `BranchTransaction` 数据，并跟 xid 关联一个 key (比如：gs/aggregationSvc/2612341069705662465/${branchid2})，表示 xid 下存在一个事务分支。
 
 ***
 
-+ 回到聚合层服务，业务逻辑执行完毕，如果业务执行成功没有异常，则根据 `XID` 获取 `BranchTransaction` 通知事务分支提交，删除 `UndoLog`；如果业务执行失败，则根据 `XID` 获取 `BranchTransaction` 通知事务分支回滚，根据 `UndoLog` 生成反向回滚语句。
++ 回到聚合层服务，业务逻辑执行完毕，如果业务执行成功没有异常，则根据 `XID` 获取 `BranchTransaction` 修改分支状态为提交，sidecar watch 到分支事务 key 变化立即删除 `UndoLog`；如果业务执行失败，则根据 `XID` 获取 `BranchTransaction` 修改分支状态为回滚，sidecar watch 到分支事务 key 变化根据 `UndoLog` 生成反向回滚语句。
 
 <br>
 
@@ -43,13 +43,13 @@
 ```sql
 session1:
     START TRANSACTION
-        INSERT /*+ XID('localhost:8092:2612341069705662465') */ INTO order.so_master (sysno, so_id, buyer_user_sysno, seller_company_code, receive_division_sysno, receive_address, receive_zip, receive_contact, receive_contact_phone, stock_sysno, payment_type, so_amt, status, order_date, appid, memo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)
-        INSERT /*+ XID('localhost:8092:2612341069705662465') */ INTO seata_order.so_item(sysno, so_sysno, product_sysno, product_name, cost_price, original_price, deal_price, quantity) VALUES (?,?,?,?,?,?,?,?)
+        INSERT /*+ XID('gs/aggregationSvc/2612341069705662465') */ INTO order.so_master (sysno, so_id, buyer_user_sysno, seller_company_code, receive_division_sysno, receive_address, receive_zip, receive_contact, receive_contact_phone, stock_sysno, payment_type, so_amt, status, order_date, appid, memo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?)
+        INSERT /*+ XID('gs/aggregationSvc/2612341069705662465') */ INTO seata_order.so_item(sysno, so_sysno, product_sysno, product_name, cost_price, original_price, deal_price, quantity) VALUES (?,?,?,?,?,?,?,?)
     COMMIT
 
 session2:
     START TRANSACTION
-        UPDATE /*+ XID('localhost:8092:2612341069705662465') */ product.inventory set available_qty = available_qty - ?, allocated_qty = allocated_qty + ? WHERE product_sysno = ? and available_qty >= ?
+        UPDATE /*+ XID('gs/aggregationSvc/2612341069705662465') */ product.inventory set available_qty = available_qty - ?, allocated_qty = allocated_qty + ? WHERE product_sysno = ? and available_qty >= ?
     COMMIT
 ```
 
