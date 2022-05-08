@@ -1,6 +1,6 @@
 # 分库分表
 
-> DBPack 当前支持跨分片查询、跨 DB 查询、order by、limit。
+> DBPack 当前支持跨分片查询、跨 DB 查询、Order By、Limit。
 
 仓库当中有集成测试用例，可通过运行用例中的 [docker-compose 文件](https://github.com/dk-lockdown/dbpack/blob/dev/docker/docker-compose-shd.yaml)来快速启动测试验证环境。该用例构造了一个 2 库 10 表的逻辑分片表，每个 DB 5 个分片表，具体分片情况请查看 [sql 脚本](https://github.com/dk-lockdown/dbpack/tree/dev/docker/scripts)。
 
