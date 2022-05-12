@@ -6,4 +6,5 @@
   - [samples](distributed_transaction_samples.md)
 - [读写分离](read_write_splitting.md)
 - [分库分表](sharding.md)
+- [贡献者](contributor.md)
 
