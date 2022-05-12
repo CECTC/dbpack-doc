@@ -25,7 +25,7 @@ Total transferred: 14787 bytes
 HTML transferred: 3348 bytes
 Requests per second: 18.54 [#/sec] (mean)
 Time per request: 161.836 [ms] (mean)
-Time per request: 53.945 [ms] (mean, across all concurrentrequests)
+Time per request: 53.945 [ms] (mean, across all concurrent requests)
 Transfer rate: 2.88 [Kbytes/sec] received
 ```
 
@@ -40,8 +40,7 @@ Total transferred: 27636 bytes
 HTML transferred: 5076 bytes
 Requests per second: 28.09 [#/sec] (mean)
 Time per request: 106.796 [ms] (mean)
-Time per request: 35.599 [ms] (mean, across all concurrent
-requests)
+Time per request: 35.599 [ms] (mean, across all concurrent requests)
 Transfer rate: 5.38 [Kbytes/sec] received
 ```
 
@@ -54,3 +53,4 @@ Transfer rate: 5.38 [Kbytes/sec] received
 [XA 协议](https://pubs.opengroup.org/onlinepubs/009680699/toc.pdf)
 
 [SAGA 理论](https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf)
+
