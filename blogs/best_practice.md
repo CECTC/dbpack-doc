@@ -38,11 +38,11 @@ DBPack 支持所有微服务编程语言，[samples](https://github.com/CECTC/db
 
 ![tcc.drawio](../images/tcc.drawio.png)
 
-APP1 在调用 APP2 的 Prepare 方法之前，事务框架根据上下问信息，自动把 Commit、Cancel 需要执行的方法名以及 Prepare 方法执行的上下文告诉事务协调者（注册分支事务），再执行 Prepare 方法。如果执行 APP1 调用 APP2 的 Prepare 方法的时候，发生网络问题，导致 APP2 迟迟没有收到 Prepare 请求，事务协调者经过一定时间后，认为全局事务超时，则 TC 根据注册上来的事务分支信息发起全局回滚，此时，APP1 向 APP2 发起一个 Cancel 请求，很巧的是，APP2 端 Cancel 请求比 Prepare 请求先到达，事务空回滚后，再收到 Prepare 请求，Prepare 如果正常执行了，那就完了，全局事务已经回滚了，这个 Prepare 操作永远也不会提交、回滚，事务挂起了，数据不一致了。
+APP1 在调用 APP2 的 Prepare 方法之前，事务框架根据上下文信息，自动把 Commit、Cancel 需要执行的方法名以及 Prepare 方法执行的上下文告诉事务协调者（注册分支事务），再执行 Prepare 方法。如果执行 APP1 调用 APP2 的 Prepare 方法的时候，发生网络问题，导致 APP2 迟迟没有收到 Prepare 请求，事务协调者经过一定时间后，认为全局事务超时，则 TC 根据注册上来的事务分支信息发起全局回滚，此时，APP1 向 APP2 发起一个 Cancel 请求，很巧的是，APP2 端 Cancel 请求比 Prepare 请求先到达，事务空回滚后，再收到 Prepare 请求，Prepare 如果正常执行了，那就完了，全局事务已经回滚了，这个 Prepare 操作永远也不会提交、回滚，事务挂起了，数据不一致了。
 
 首先，这种概率很小，其次，为什么一定要在 Prepare 网络请求之前注册分支事务，可不可以在 APP2 收到 Prepare 请求执行业务代码之前注册，这时候一定能确定 Prepare 请求已经到了，Cancel 请求确定能在 Prepare 请求之后发生，是不是就不存在悬挂问题了。
 
-实际上 seata-golang 诞生之时就支持在分支业务执行端注册 TCC 分支事务，但大家可能没有深入思考这个问题，机械地认为事务悬挂必然会发生。
+实际上 seata-golang 诞生之时就支持在分支业务执行端注册 TCC 事务分支，但大家可能没有深入思考这个问题，机械地认为事务悬挂必然会发生。
 
 DBPack 也是在请求到达 sidecar 后再注册 TCC 事务分支，确保 Prepare 先于 Cancel 执行。有人说因为 CPU 调度的原因，还是可能出现 Cancel 先于 Prepare 执行的情况，但这种概率非常非常低。具体到操作的业务数据，建议使用 XID 和 BranchID 加锁。
 
