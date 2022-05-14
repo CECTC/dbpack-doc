@@ -1,5 +1,7 @@
 # samples
 
+> DBPack 支持任意编程语言，目前仓库中有 go、java 语言的例子，php 和 python 的例子正在制作中。
+
 ### 第一步：clone 代码
 
 ```
