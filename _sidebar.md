@@ -1,5 +1,6 @@
 - [简介](README.md)
 - [快速开始](getting_started.md)
+- [架构原理](architecture.md)
 - [分布式事务](distributed_transaction.md)
   - [AT 模式](dbpack_at.md)
   - [TCC 模式](dbpack_tcc.md)
