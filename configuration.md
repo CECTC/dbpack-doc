@@ -1,6 +1,6 @@
 # 配置说明
 
-> DBPack 的配置吸取了 kubernetes 的思想，everything is resource！listener 是 资源，物理 DB 的 data source 是资源，filter 也是资源，所有的资源通过 name 索引组合起来。
+> DBPack 的配置吸取了 kubernetes 的思想，everything is resource！listener 是资源，物理 DB 的 data source 是资源，filter 也是资源，所有的资源通过 name 索引组合起来。
 
 ## 一、Listener 监听器
 
