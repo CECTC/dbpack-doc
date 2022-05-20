@@ -1,6 +1,6 @@
 # TCC 模式
 
-<img src="./images/image-20220427100734991.png" alt="image-20220427100734991" style="zoom:67%;" />
+<img src="./images/distributed-transaction.gif" alt="image-20220427100734991" style="zoom:67%;" />
 
 + 用户对聚合层服务发起请求后，经过 sidecar 的拦截，生成 `GlobalTransaction` 数据，并产生全局唯一标记 `XID`。
 

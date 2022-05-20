@@ -1,6 +1,6 @@
 # AT 模式
 
-<img src="./images/image-20220427100734991.png" alt="image-20220427100734991" style="zoom:67%;" />
+<img src="./images/distributed-transaction.gif" alt="image-20220427100734991" style="zoom:67%;" />
 
 + 请求发到聚合层服务后，在 etcd 写入全局事务数据，产生唯一标识 xid（比如：gs/aggregationSvc/2612341069705662465）。
 
