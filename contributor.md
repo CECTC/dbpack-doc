@@ -10,6 +10,7 @@
 + [dk-lockdown](https://github.com/dk-lockdown)
 + [fatelei](https://github.com/fatelei)
 + [gorexlv](https://github.com/gorexlv)
++ [hzliangbin](https://github.com/hzliangbin) 
 + [JuwanXu](https://github.com/JuwanXu)
 + [rocymp](https://github.com/rocymp)
 + [tanryberdi](https://github.com/tanryberdi)
