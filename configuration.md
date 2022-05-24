@@ -173,3 +173,20 @@ data_source_cluster:
 ```
 
 上面的代码展示了数据源的配置。
+
+## 五、分布式事务
+
+```yaml
+distributed_transaction:
+  appid: svc
+  // 回滚最大重试时间，单位毫秒，即超过该设置声明的时间，相应的事务分支不再回滚，该时间可根据业务自身的特性动态调整。
+  retry_dead_threshold: 130000
+  // 是否允许回滚超时后释放全局锁，如果相应资源数据一直被锁住，再修改该数据则不被允许，建议设置为 true，即回滚超时后释放全局锁。
+  rollback_retry_timeout_unlock_enable: true
+  // etcd 配置
+  etcd_config:
+    endpoints:
+      - etcd:2379
+```
+
+上面的代码展示了分布式事务的配置。
