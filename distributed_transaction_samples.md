@@ -1,6 +1,6 @@
 # samples
 
-> DBPack 支持任意编程语言，目前仓库中有 go、java 语言的例子，php 和 python 的例子正在制作中。
+> DBPack 支持任意编程语言，目前仓库中有 [go](https://github.com/CECTC/dbpack-samples/blob/main/go/README.md)、[java](https://github.com/CECTC/dbpack-samples/blob/main/java/README.md)、[php](https://github.com/CECTC/dbpack-samples/blob/main/php/README.md)、[python](https://github.com/CECTC/dbpack-samples/blob/main/python/README.md) 的例子。
 
 ### 第一步：clone 代码
 
