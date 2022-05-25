@@ -16,3 +16,11 @@ git clone git@github.com:cectc/dbpack.git
 
 进入代码目录，运行 `make build` 进行编译，完成后，在 `dist` 文件夹下将生成对应的二进制文件。
 
+## Docker 镜像
+
+```
+docker pull cectc/dbpack:latest
+```
+
+启动 dbpack 时请为其指定配置文件。
+
