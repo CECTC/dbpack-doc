@@ -59,7 +59,7 @@ hptx 是当前性能最强的云原生、无侵入分布式事务解决方案，
 
 
 
-## [链接](https://cectc.github.io/dbpack-doc/#/blogs/best_practice?id=链接)
+## 链接
 
 Hptx 项目地址：https://github.com/cectc/hptx
 
