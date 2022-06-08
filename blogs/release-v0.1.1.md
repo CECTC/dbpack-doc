@@ -1,6 +1,6 @@
 # DBPack v0.1.1 发布公告
 
-> 2022 年 5 月 24 日，我们发布了 DBPack [v0.1.0](release-v0.1.0) 版本，该版本主要 release 了分布式事务功能。在我们的规划里，DBPack 是要支持所有微服务开发语言协调分布式事务的，但经过社区反馈，dotnet core 并不支持。于是，我们在 v0.1.1 对 dotnet core 进行了支持。sample 见：https://github.com/CECTC/dbpack-samples/tree/main/dotnet。下面就如何支持 dotnet core 做一个说明。
+> 2022 年 5 月 24 日，我们发布了 DBPack [v0.1.0](release-v0.1.0) 版本，该版本主要 release 了分布式事务功能。在我们的规划里，DBPack 是要支持所有微服务开发语言协调分布式事务的，但经过社区反馈，dotnet core 并不支持。于是，我们在 v0.1.1 对 dotnet core 进行了支持。下面就如何支持 dotnet core 做一个说明。
 
 ## MySql 协议
 
@@ -52,7 +52,7 @@ https://github.com/DapperLib/Dapper/issues/474
 
 在 v0.1.0 版本，我们只对 COM_STMT_EXECUTE 请求做了拦截处理，来协调分布式事务问题。dotnet core 使用 COM_QUERY 提交请求自然无法协调分布式事务，在 v0.1.1 我们增加了 COM_QUERY 请求协调分布式事务的支持，这样真正做到了支持所有微服务语言协调分布式事务。
 
-
+dotnet core sample 见：https://github.com/CECTC/dbpack-samples/tree/main/dotnet。
 
 ## 其他特性
 
