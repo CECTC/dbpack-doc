@@ -52,6 +52,43 @@ https://github.com/DapperLib/Dapper/issues/474
 
 在 v0.1.0 版本，我们只对 COM_STMT_EXECUTE 请求做了拦截处理，来协调分布式事务问题。dotnet core 使用 COM_QUERY 提交请求自然无法协调分布式事务，在 v0.1.1 我们增加了 COM_QUERY 请求协调分布式事务的支持，这样真正做到了支持所有微服务语言协调分布式事务。
 
+
+
+## 其他特性
+
+本次发版，还修复了一些 bug，增加了 status api 用于查询 dbpack 的运行状态：
+
+```
+$ curl http://localhost:9999/status
+$ {
+	"listeners": [{
+		"protocol_type": "mysql",
+		"socket_address": {
+			"address": "0.0.0.0",
+			"port": 13306
+		},
+		"active": true
+	}],
+	"distributed_transaction_enabled": true,
+	"is_master": true
+}
+```
+
+至此，我们有了
+
++ /live
++ /ready
++ /status
++ /metrics
+
+这些 api 辅助我们查看 dbpack 的运行状态。
+
+完整的版本变更日志请看 https://github.com/CECTC/dbpack/releases。
+
+在下一个版本，我们会增加 tracing 和审计日志的功能。
+
+
+
 ## 一些链接
 
 DBPack 项目地址：https://github.com/cectc/dbpack
