@@ -1,6 +1,6 @@
 # DBPack v0.1.1 发布公告
 
-> 2022 年 5 月 24 日，我们发布了 DBPack [v0.1.0](release-v0.1.0) 版本，该版本主要 release 了分布式事务功能。在我们的规划里，DBPack 是要支持所有微服务开发语言协调分布式事务的，但经过社区反馈，dotnet core 并不支持。于是，我们在 v0.1.1 对 dotnet core 进行了支持。下面就如何支持 dotnet core 做一个说明。
+> 2022 年 5 月 24 日，我们发布了 DBPack [v0.1.0](release-v0.1.0.md) 版本，该版本主要 release 了分布式事务功能。在我们的规划里，DBPack 是要支持所有微服务开发语言协调分布式事务的，但经过社区反馈，dotnet core 并不支持。于是，我们在 v0.1.1 对 dotnet core 进行了支持。下面就如何支持 dotnet core 做一个说明。
 
 ## MySql 协议
 
