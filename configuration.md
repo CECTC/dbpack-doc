@@ -119,8 +119,20 @@ filters:
       # transaction_infos 如果 http 请求的 url 和 request_path 匹配，则拦截器会执行创建全局事务的逻辑，并将 x_dbpack_xid 注入请求 header 中。
       transaction_infos:
         - request_path: "/v1/order/create"
-          # 全局事务超时时间
+          # 全局事务超时时间，单位毫秒
           timeout: 60000
+          // 完全匹配, 支持 [prefix] 前缀匹配、[regex] 正则匹配，默认 exact
+          match_type: exact
+        - request_path: "/v1/pay/"
+          # 全局事务超时时间，单位毫秒
+          timeout: 60000
+          // 前缀匹配
+          match_type: prefix
+        - request_path: "/v1/account(/.*)?"
+          # 全局事务超时时间，单位毫秒
+          timeout: 60000
+          // 正则匹配
+          match_type: regex
   # MysqlDistributedTransaction filter，该 filter 拦截 mysql 请求，处理分布式事务相关逻辑
   - name: mysqlDTFilter
     kind: MysqlDistributedTransaction
