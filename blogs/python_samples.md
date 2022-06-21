@@ -243,9 +243,7 @@ if __name__ == '__main__':
 
 注意到 sql 中以注解的形式添加使用了 xid ，主要是方便配合 dbpack 识别后做出相应的分布式事务处理，也就是回滚还是commit。
 
-这里数据库连接使用 autocommit 这种方式。
-
-另外，由于默认情况下，dbpack 会不处理 text 协议下的 sql 中的 xid注入，这里使用 python 中的 mysql.connector 这个 lib 来支持 sql 传输中的二段式加密传输协议，见代码中声明的`prepared=true`。
+这里数据库连接使用 autocommit 这种方式。同时，使用 python 中的 mysql.connector 这个 lib 来支持 sql 传输中的二段式加密传输协议，见代码中声明的`prepared=true`。
 
 用以下命令，使用 dbpack 代理 order 微服务：
 
