@@ -53,7 +53,7 @@ employees-master 为主数据源，employees-slave 为从数据源。
 
 ![read-write-spliiting](./images/read-write-spliiting.png)
 
-主从的标识是通过 `weight` 字段标识的。`r0w10` 标识了读写的权重，`w` 后的数字大于 0，表示该数据源为主数据源，如果用户有多个主数据源，做了主主复制，可配置多个主数据源的 `write` 权重。
+主从的标识是通过 `weight` 字段标识的。`r0w10` 标识了读写的权重，`w` 后的数字大于 0，表示该数据源为主数据源。只有在负载均衡算法是 `RandomWeight` 时，才按照权重路由请求。除 `RandomWeight` 还支持  `Random`、`RoundRobin`，分别在数据源之间随机选择数据源路由请求和轮询依次路由请求。如果用户有多个主数据源，做了主主复制，可配置多个主数据源的 `write` 权重。
 
 例如：
 
