@@ -22,5 +22,11 @@ git clone git@github.com:cectc/dbpack.git
 docker pull cectc/dbpack:latest
 ```
 
-启动 dbpack 时请为其指定配置文件。
+dbpack 默认读取根目录下的 config.yaml 配置文件，启动 dbpack 时请为其指定配置文件。
+
+例如：
+
+```
+docker run -p 13306:13306 --name dbpack -v /root/config.yaml:/config.yaml -d cectc/dbpack:latest
+```
 
