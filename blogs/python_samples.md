@@ -1,4 +1,4 @@
-## DBpack 分布式事务中间件赋能 python 微服务
+## DBPack 赋能 python 微服务协调分布式事务
 
 ### 什么是分布式事务
 
