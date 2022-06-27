@@ -8,7 +8,7 @@
 
 新兴的AT事务解决方案，例如[Seata](https://github.com/seata/seata)和[Seata-golang](https://github.com/opentrx/seata-golang)，通过数据源代理层的资源管理器RM记录SQL回滚日志，跟随本地事务一起提交，大幅减少了数据的锁定时间，性能好且对业务几乎没有侵入。其缺点是支持的语言比较单一，例如Seata只支持Java语言类型的微服务，Seata-golang只支持Go语言类型的微服务。
 
-为了突破AT事务对业务编程语言的限制，现在业界正在网DB Mesh的方向发展，通过将事务中间件部署在SideCar的方式，达到任何编程语言都能使用分布式事务中间件的效果。
+为了突破AT事务对业务编程语言的限制，现在业界正在往DB Mesh的方向发展，通过将事务中间件部署在SideCar的方式，达到任何编程语言都能使用分布式事务中间件的效果。
 
 [DBPack](https://github.com/CECTC/dbpack)是一个处理分布式事务的数据库代理，其能够拦截MySQL流量，生成对应的事务回滚镜像，通过与ETCD协调完成分布式事务，性能很高，且对业务没有入侵，能够自动补偿SQL操作，支持接入任何编程语言。DBPack还支持TCC事务模式，能够自动补偿HTTP请求。目前其demo已经有Java、Go、Python和PHP，TCC的sample也已经在路上了，demo示例可以关注[dbpack-samples](https://github.com/CECTC/dbpack-samples)。
 
