@@ -14,7 +14,7 @@
 
 最新版DBPack不仅支持预处理的sql语句，还支持text类型的sql。DBPack最新版还兼容了php8的pdo_mysql扩展。Mysql 客户端在给用户发送 sql 执行结果时，如果执行没有异常，发送的第一个包为 OKPacket，该包中有一个标志位可以标识 sql 请求是否在一个事务中。如下图所示
 
-<img src="../images/image-20220629161325409.png" alt="image-20220629161325409" style="zoom:50%;" />
+<img src="https://cectc.github.io/dbpack-doc/images/image-20220629161325409.png" alt="image-20220629161325409" style="zoom:50%;" />
 
 这个包的内容为：
 
