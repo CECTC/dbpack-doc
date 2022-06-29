@@ -12,7 +12,23 @@
 
 [DBPack](https://github.com/CECTC/dbpack)是一个处理分布式事务的数据库代理，其能够拦截MySQL流量，生成对应的事务回滚镜像，通过与ETCD协调完成分布式事务，性能很高，且对业务没有入侵，能够自动补偿SQL操作，支持接入任何编程语言。DBPack还支持TCC事务模式，能够自动补偿HTTP请求。目前其demo已经有Java、Go、Python和PHP，TCC的sample也已经在路上了，demo示例可以关注[dbpack-samples](https://github.com/CECTC/dbpack-samples)。
 
-最新版DBPack不仅支持预处理的sql语句，还支持text类型的sql。DBPack最新版还兼容了php8的pdo_mysql扩展。（pdo_mysql在php8下，会对statusFlag标志位进行校验，而php7则不会，这会导致dbpack提前关闭事务，抛出`transaction not active`的异常。）
+最新版DBPack不仅支持预处理的sql语句，还支持text类型的sql。DBPack最新版还兼容了php8的pdo_mysql扩展。Mysql 客户端在给用户发送 sql 执行结果时，如果执行没有异常，发送的第一个包为 OKPacket，该包中有一个标志位可以标识 sql 请求是否在一个事务中。如下图所示
+
+<img src="https://cectc.github.io/dbpack-doc/images/image-20220629161325409.png" alt="image-20220629161325409" style="zoom:50%;" />
+
+这个包的内容为：
+
+```
+07 00 00 // 前 3 个字节表示 payload 的长度为 7 个字节
+01 // sequence 响应的序号，前 4 个字节一起构成了 OKPacket 的 header
+00 // 标识 payload 为 OKPacket
+00 // affected row
+00 // last insert id
+03 00 // 状态标志位
+00 00 // warning 数量
+```
+
+dbpack 之前的版本将标志位设置为 0，java、golang、.net core、php 8.0 之前的 mysql driver 都能正确协调事务，php 8.0 的 pdo driver 会对标志位进行校验，所以 php 8.0 以上版本在使用 dbpack 协调分布式事务时，会抛出 `transaction not active` 异常。最新版本已经修复了这个问题。
 
 下图是具体的DBPack事务流程图。
 
