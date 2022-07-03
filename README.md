@@ -1,5 +1,7 @@
 # DBPack
 
+## 中文 | [English](https://github.com/CECTC/dbpack-doc/blob/master/README_EN.md)
+
 <img src="./images/dbpack.svg" alt="image-20220427091848831" />
 
 > 它是一个数据库代理，目标是解决业务开发中遇到的分布式事务问题，并提供读写分离、分库分表的解决方案。通过 Mesh 化的部署方式，屏蔽复杂的基础逻辑，使业务开发无需依赖特定的 SDK，简化开发流程，提高开发效率。
