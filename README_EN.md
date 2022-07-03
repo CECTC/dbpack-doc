@@ -23,7 +23,7 @@
 
 ## Architecture
 
-![architecture](./images/sc_20220418101615.png)
+![architecture](./images/arch-for-dbpack.drawio.png)
 
 + Listener：parse SQL protocol
 + Executor：forward SQL request to actual DB server
