@@ -35,15 +35,15 @@ dbpack 之前的版本将标志位设置为 0，java、golang、.net core、php 
 ![dbpack-workflow](../images/dbpack-workflow.png)
 
 其事务流程简要描述如下：  
-1. 客户端向聚合层服务的DBPack代理发起HTTP请求。
-2. DBPack生成全局唯一的XID，存储到ETCD中。注意请求的地址和端口指向DBPack，并不直接指向实际API。
-3. 如果开启全局事务成功（如果失败则直接结束事务），聚合层服务就可以通过HTTP header（X-Dbpack-Xid）拿到XID了。此时，聚合服务调用服务1并传递XID。
+1. 客户端向聚合层服务的DBPack代理发起HTTP请求。注意请求的地址和端口指向DBPack，并不直接指向实际API。
+2. DBPack生成全局唯一的XID，存储到ETCD中。
+3. 如果开启全局事务成功（如果失败则直接结束事务），聚合层服务就可以通过HTTP header（X-Dbpack-Xid）拿到XID了。此时，聚合服务调用服务1的接口，并传递XID。
 4. 服务1拿到XID，通过DBPack代理，注册分支事务（生成BranchID等信息，并存储到ETCD）。
-5. 服务1的分支事务注册成功后，生成本地事务的回滚镜像，随着本地事务一起commit。
+5. 服务1的分支事务注册成功后，DBPack自动生成本地事务的回滚镜像，随着本地事务一起commit。
 6. 服务2进行与服务1相同的步骤4和5。
-7. 聚合层服务根据服务1和服务2的结果，决议是全局事务提交还是回滚，如果是成功，则返回HTTP 200给DBPack（除200以外的状态码都会被DBPack认为是失败）。DBPack更新ETCD中的全局事务状态为全局提交中或回滚中。
+7. 聚合层服务根据服务1和服务2的结果，决定是全局事务提交还是回滚。如果是提交，则返回HTTP 200给DBPack（除200以外的状态码都会被DBPack认为是失败）。DBPack更新ETCD中的全局事务状态为全局提交中或回滚中。
 8. 服务1和服务2的DBPack，通过ETCD的watch机制，得知本地的分支事务是该提交还是回滚（如果是提交，则删除回滚日志；如果是回滚，则执行通过回滚日志回滚到事务前镜像）。
-9. 所有的分支事务提交或回滚完成后，聚合层服务的DBPack的协程会检测到事务已经完成，将从ETCD删除XID和BranchID等事务信息。
+9. 所有的分支事务提交或回滚完成后，ETCD里的分支事务状态将更新为已提交或已回滚，聚合层服务的DBPack的协程会检测到全局事务已经完成，将从ETCD删除XID和BranchID等事务信息。
 
 本文将以PHP语言为例，详细介绍如何使用PHP对接DBPack完成分布式事务。实际使用其他语言时，对接过程也是类似的。
 
@@ -154,8 +154,6 @@ server {
 ### Step5: 编写应用程序
 #### aggregation service example
 ```php
-<?php
-
 class AggregationSvc
 {
 
@@ -228,8 +226,6 @@ function responseError() {
 ```
 #### order service example
 ```php
-<?php
-
 class OrderDB
 {
     private PDO $_connection;
