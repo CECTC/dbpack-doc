@@ -21,7 +21,7 @@
 
 ## 架构
 
-![architecture](./images/sc_20220418101615.png)
+![architecture](./images/arch-for-dbpack.drawio.png)
 
 + Listener 监听器：负责解析 SQL 协议。
 + Executor 执行期：负责转发 SQL 请求到后端物理 DB。
