@@ -191,7 +191,7 @@ The above code shows the configuration of the data source.
 ```yaml
 distributed_transaction:
   appid: svc
-  // The maximum retry time for rollback, in milliseconds, that is, if the time specified by this setting is exceeded, the corresponding transaction branch will not be rolled back. The time can be dynamically adjusted according to the characteristics of the business itself.
+  // The maximum retry time for rollback, in milliseconds, that is, if the time specified by this setting is exceeded, the corresponding transaction branch will not be rolled back. The time can be dynamically adjusted according to the need of the business itself.
   retry_dead_threshold: 130000
   // Whether to allow the global lock to be released after the rollback timeout, if the corresponding resource data has been locked, and then modifying the data is not allowed, it is recommended to set it to true, that is, to release the global lock after the rollback timeout.
   rollback_retry_timeout_unlock_enable: true
