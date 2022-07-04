@@ -116,7 +116,7 @@ filters:
     conf:
       # The appid of the proxied application
       appid: aggregationSvc
-      # transaction_infos If the url of the http request matches the request_path, the interceptor executes the logic of creating a global transaction and injects x-dbpack-xid into the request header.
+      # transaction_infos: If the url of the http request matches the request_path, the interceptor executes the logic of creating a global transaction and injects x-dbpack-xid into the request header.
       transaction_infos:
         - request_path: "/v1/order/create"
           # Global transaction timeout, in milliseconds
