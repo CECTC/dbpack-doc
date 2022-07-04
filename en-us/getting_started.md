@@ -14,7 +14,7 @@ Make sure [Git is installed](https://git-scm.com/downloads) on your machine and 
 
 ## Build
 
-Go to the code directory and run `make build-local` to compile. Once complete, the corresponding binary will be generated under the `dist` folder.
+Go to the code directory and run `make build-local` to compile. Once completed, the corresponding binary will be generated under the `dist` folder.
 
 ## Docker Image
 
