@@ -97,7 +97,7 @@ executors:
             "1": 5-9          
 ```
 
-The above code shows three executor configurations of DBPack, which are `sdb`, `rws`, `shd` three modes. In `shd` mode, there are two sharded databases `drug_0` and `drug_1` indicating that the `drug` database is split into 2 databases. The `topology` in the above code indicates that the `drug_resource` table is split into 10 sharded tables, which belong to two databases, namely:
+The above code shows three executor configurations of DBPack, which are `sdb`, `rws`, `shd` three modes. In `shd` mode, there are two sharded databases `drug_0` and `drug_1` indicating that the `drug` database is split into 2 databases. The `topology` in the above code indicates that the `drug_resource` table is split into 10 sharded tables, which belong to two databases:
 
 ```
 drug_0: drug_resource_0、drug_resource_1、drug_resource_2、drug_resource_3、drug_resource_4
