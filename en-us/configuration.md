@@ -45,7 +45,7 @@ executors:
     # sdb mode stands for single db, in this mode, only distributed transaction problems can be solved
     mode: sdb
     config:
-      # In single db mode, the physical data source of the backend is product
+      # In single db mode, the physical data source of the backend is `product` DB
       data_source_ref: product
   - name: redirect2
     # The rws mode stands for read write splitting. This mode can solve the problem of distributed transactions and read and write splitting.
