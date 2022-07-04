@@ -121,7 +121,7 @@ filters:
         - request_path: "/v1/order/create"
           # Global transaction timeout, in milliseconds
           timeout: 60000
-          # Exact match, supports [prefix] prefix match, [regex] regular match, default exact
+          # Exact match, supports [prefix] prefix match, [regex] regular match, default is exact
           match_type: exact
         - request_path: "/v1/pay/"
           # Global transaction timeout, in milliseconds
