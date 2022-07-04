@@ -104,7 +104,7 @@ drug_0: drug_resource_0、drug_resource_1、drug_resource_2、drug_resource_3、
 drug_1: drug_resource_5、drug_resource_6、drug_resource_7、drug_resource_8、drug_resource_9
 ```
 
-After calculating which shard table needs to execute the sql request based on the shard key, it can be determined which physical DB should be executed according to the topology.
+After calculating which shard table needs to execute the sql request based on the shard key, it can determine which physical DB should be executed according to the topology.
 
 ## 3、Filter
 
