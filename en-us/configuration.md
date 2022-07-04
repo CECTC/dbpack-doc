@@ -31,7 +31,7 @@ listeners:
         dksl: "123456"
       # Version of the backend DB
       server_version: "8.0.27"
-    # The sql request received by the mysql listener is handed over to the executor named redirect to execute
+    # The sql request received by the mysql listener is handed over to the executor named `redirect`
     executor: redirect
 ```
 
