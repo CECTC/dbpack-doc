@@ -89,7 +89,7 @@ executors:
           sharding_rule:
             # column represents the sharding key
             column: id
-            # Sharding algorithm, currently only the sharding algorithm based on digital modulo is implemented, namely NumberMod
+            # Sharding algorithm, currently only the sharding algorithm based on digital modulo is implemented, named NumberMod
             sharding_algorithm: NumberMod
           # topology is used to describe the topology of the logical table
           topology:
