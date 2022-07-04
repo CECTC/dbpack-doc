@@ -1,6 +1,6 @@
 # Configuration
 
-> The configuration of DBPack draws on the idea of kubernetes, everything is resource! The listener is the resource, the data source of the physical DB is the resource, and the filter is also the resource. All the resources are combined by the name index.
+> The configuration of DBPack draws on the idea from Kubernetes: everything is resource! The listener is a resource, the data source of the physical DB is a resource, and the filter is also a resource. All the resources are combined by the name index.
 
 ## 1、Listener
 
