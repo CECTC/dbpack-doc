@@ -166,7 +166,7 @@ data_source_cluster:
     dsn: root:123456@tcp(dbpack-mysql1:3306)/employees?timeout=1s&readTimeout=1s&writeTimeout=1s&parseTime=true&loc=Local&charset=utf8mb4,utf8
     # Interval to ping physical DB
     ping_interval: 20s
-    # If the ping fails three times in a row, the status of the data source is changed to Unknown, and the request traffic will not be obtained. If the ping succeeds three times in a row, the recovery status will be Running.
+    # If the ping fails three times in a row, the status of the data source is changed to Unknown, and the request traffic will not reach. If the ping succeeds three times in a row, the recovery status will be Running.
     ping_times_for_change_status: 3
     # filter on connection
     filters:
