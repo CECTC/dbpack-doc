@@ -26,7 +26,7 @@
 
 2. 负载均衡算法反序列化异常
 
-   <img src="../images/image-20220707170118827.png" alt="image-20220707170118827" style="zoom:50%;" align="left"/>
+   <img src="https://cectc.github.io/dbpack-doc/images/image-20220707170118827.png" alt="image-20220707170118827" style="zoom:50%;" align="left"/>
 
    该异常导致读写分离查询请求都以随机算法在 DB 之间执行。
 
