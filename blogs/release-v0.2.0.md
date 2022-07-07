@@ -8,7 +8,7 @@
 
    Mysql 客户端在给用户发送 sql 执行结果时，如果执行没有异常，发送的第一个包为 OKPacket，该包中有一个标志位可以标识 sql 请求是否在一个事务中。如下图所示：
 
-   <img src="https://cectc.github.io/dbpack-doc/images/image-20220629161325409.png" alt="image-20220629161325409" style="zoom:50%;" align="left" />
+   <img src="https://cectc.github.io/dbpack-doc/images/image-20220629161325409.png" alt="image-20220629161325409" style="zoom:50%;"/>
 
    这个包的内容为：
 
@@ -26,7 +26,7 @@
 
 2. 负载均衡算法反序列化异常
 
-   <img src="https://cectc.github.io/dbpack-doc/images/image-20220707170118827.png" alt="image-20220707170118827" style="zoom:50%;" align="left"/>
+   <img src="https://cectc.github.io/dbpack-doc/images/image-20220707170118827.png" alt="image-20220707170118827" style="zoom:50%;"/>
 
    该异常导致读写分离查询请求都以随机算法在 DB 之间执行。
 
