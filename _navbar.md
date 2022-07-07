@@ -7,3 +7,4 @@
   + [DBPack v0.1.1 发布公告](blogs/release-v0.1.1.md)
   + [DBPack 赋能 python 微服务协调分布式事务](blogs/python_samples.md)
   + [使用强大的DBPack处理分布式事务（PHP使用教程）](blogs/dbpack-get-started-with-php.md)
+  + [DBPack 读写分离功能发布公告](blogs/release-v0.2.0.md)
