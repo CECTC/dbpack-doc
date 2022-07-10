@@ -72,7 +72,7 @@ filters:
 [timestamp],[username],[ip address],[connection id],[command type],[command],[sql text],[args],[affected row]
 ```
 
-记录内容过如下：
+记录内容如下：
 
 ```
 2022-06-14 07:15:44,dksl,172.18.0.1:60372,1,COM_QUERY,,SET NAMES utf8mb4,[],0
