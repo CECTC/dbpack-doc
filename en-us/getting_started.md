@@ -1,6 +1,6 @@
-# Getting started
+# Getting Started
 
-> Run DBPack at your local enviroment.
+> Run DBPack at your local environment.
 
 ## Get Code
 
@@ -22,7 +22,7 @@ Go to the code directory and run `make build-local` to compile. Once completed, 
 docker pull cectc/dbpack:latest
 ```
 
-By default, dbpack reads the `config.yaml` configuration file in the root directory. It is required to specify a configuration file for dbpack when you start it.
+By default, DBPack reads the `config.yaml` configuration file in the root directory. It is required to specify a configuration file for DBPack when you start it.
 
 E.g:
 

@@ -6,7 +6,7 @@
 
 ## Features
 
-+ support MYSQL protocal
++ support MYSQL protocol
 + simple and easy to use to handle distributed transaction
 + support read && write splitting, customized SQL route through `Hint`
 + can be deployed as a sidecar, so that any programming language can use it to handle distributed transaction
