@@ -1,6 +1,6 @@
 # AT Mode
 
-<img src="../images/distributed-transaction-en.gif" alt="image-20220427100734991" style="zoom:67%;" />
+<img src="https://cectc.github.io/dbpack-doc/images/distributed-transaction-en.gif" alt="image-20220427100734991" style="zoom:67%;" />
 
 + After the request been sent to the aggregation service, the ETCD will write global transaction data, and the unique mark xid is generated. （example: gs/aggregationSvc/2612341069705662465）。
 
