@@ -15,7 +15,7 @@
 
   By setting the interval and count for `ping` DB, DBPack will check DB status periodically. In upper configuration, if the `ping` failed 3 times continuously, the DB status will be updated to `Unknown`; On the other hand, if `ping` succeed 3 times continuously, the DB status will be updated to `Running`. There will be no traffic route to DB of `Unknown` status.
 
-Here is and an config example:
+Here is a config example:
 
 ```yaml
 executors:
@@ -51,13 +51,13 @@ data_source_cluster:
 
 employees-master is master datasource，employees-slave is slave datasource。
 
-![read-write-spliiting](./images/read-write-spliiting.png)
+![read-write-splitting](../images/read-write-splitting.png)
 
-The tag of master/slave is marked by `weight` field. `r0w10` marks for the weights of read and write. The number `10` after `w`, which > 0, means that the datasource is the master datasource. Only when the load balancing algorithm is configurated to `RandomWeight` shall the traffic been route according to the weights. Besides `RandomWeight`, it also support `Random` and `RoundRobin` algorithm, which respectively means radom datasource to route and round robin route. Users can configure `write` weights for those master datasource if they configured multiple master datasource and master-slave duplication.
+The tag of master/slave is marked by `weight` field. `r0w10` marks for the weights of read and write. The number `10` after `w`, which > 0, means that the datasource is the master datasource. Only when the load balancing algorithm is configured to `RandomWeight` shall the traffic been route according to the weights. Besides `RandomWeight`, it also support `Random` and `RoundRobin` algorithm, which respectively means random datasource to route and round-robin route. Users can configure `write` weights for those master datasource if they configured multiple master datasource and master-slave duplication.
 
 For example:
 
-![read-write-splitting2](./images/read-write-splitting2.png)
+![read-write-splitting2](../images/read-write-splitting2.png)
 
 Following is a config example that has 2 master and 2 slave datasource.
 

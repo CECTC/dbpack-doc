@@ -4,7 +4,7 @@
 
 ## Theory
 
-Both the AT and TCC distributed transaction are based on 2PC (tow phase commit)) theory. There are many solutions for distributed transaction, besides AT mode, TCC mode, there are XA mode, SAGA mode, eventual consistency solution and so on. Companies should select suitable solutions according to their technic stack, development capacity, business scenario...etc.
+Both the AT and TCC distributed transaction are based on 2PC (tow phase commit) theory. There are many solutions for distributed transaction, besides AT mode, TCC mode, there are XA mode, SAGA mode, eventual consistency solution and so on. Companies should select suitable solutions according to their technic stack, development capacity, business scenario...etc.
 
 
 

@@ -1,6 +1,6 @@
 # Contributors
 
-> Our DBPack is an open community, and we are all open source enthusiast. Everyone can grow to be a specialist here. Welcome everyone to contribute to our community, including not only opening pull-requests, but also testing and documentation, which are also very important contributions.
+> DBPack is an open community, and we are all open source enthusiast. Everyone can grow to be an expert here. We welcome everyone to contribute to this community, including not only opening pull-requests, but also testing and documentation, which are also very important contributions.
 
 ## Contributors List
 
