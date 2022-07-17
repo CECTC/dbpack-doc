@@ -17,7 +17,7 @@
 
 下面是一个例子：
 
-```golang
+```yaml
 executors:
   - name: redirect
     mode: rws
