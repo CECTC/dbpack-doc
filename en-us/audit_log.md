@@ -33,7 +33,7 @@ filters:
 
 To enable audit log, please add `audit_log_dir` to filters to configure log directory, as well as configuring audit log filter for datasource, so that DBPack will output audit logs to specified directories. You can set `max_size` to configure log rotate. In upper configuration example, the DBPack will create new audit log file after the first log file reached 300MB. You can also configure log retain time and whether to compress the rotated logs.
 
-The audit log format would be:
+The audit log format will be:
 
 ```
 [timestamp],[username],[ip address],[connection id],[command type],[command],[sql text],[args],[affected row]

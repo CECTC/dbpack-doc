@@ -148,7 +148,7 @@ filters:
     kind: ConnectionMetricFilter
 ```
 
-The above code shows the three filter configurations that DBPack currently supports. If you use the distributed transaction function, you need to configure the `HttpDistributedTransaction` and `MysqlDistributedTransaction` filters. filter is referenced by Listener and Executor by name.
+The above code shows the three filter configurations that DBPack currently supports. If you want to use the distributed transaction function, you need to configure the `HttpDistributedTransaction` and `MysqlDistributedTransaction` filters. Filter is referenced by Listener and Executor name.
 
 ## 4、DataSource
 

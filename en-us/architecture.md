@@ -1,5 +1,5 @@
 # DBPack Architecture
 
-![dbpack-architecture](../images/dbpack-architecture.svg)
+Please refer to following diagram for DBPack architecture design.
 
-Please refer to upper diagram for DBPack architecture design.
+![dbpack-architecture](../images/dbpack-architecture.svg)
