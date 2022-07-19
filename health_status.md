@@ -23,7 +23,7 @@
 
   该接口反馈 DBPack 配置的 `Listener` 是否 `active`，是否开启分布式事务功能，以及多个副本的 DBPack 是否是 `master`。
 
-+ /metrics 接口
++ `/metrics` 接口
 
   该接口反馈 DBPack 运行时收集到的指标。
 
