@@ -1,6 +1,6 @@
 # DBPack
 
-## 中文 | [English](./en-us/README.md)
+## 中文 | [English](/en-us/README.md)
 
 <img src="./images/dbpack.svg" alt="image-20220427091848831" />
 
