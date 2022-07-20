@@ -1,5 +1,7 @@
 # DBPack
 
+## [中文](../README.md) | English
+
 <img src="https://cectc.github.io/dbpack-doc/images/dbpack.svg" alt="image-20220427091848831" />
 
 > It is a database proxy that aims to solve the distributed transaction problems during business development, which provides solutions for read && write splitting, database and table sharding. Through the mesh-based deployment method, DBPack shields complex basic logic, so that business development does not need to rely on a specific SDK, which simplifies the development process and improves development efficiency.

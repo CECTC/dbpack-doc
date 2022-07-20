@@ -2,7 +2,7 @@
 
 通过 DBPack 代理开启的全局服务，会自动在 http header 中注入 `traceparent`，`traceparent` 的值如下：
 
-`00-85d85c3112590a76d0723eed4326dbd8-81e51018180f4913-01`
+`00-85d85c3112590a76d0723eed4326dbd8-81e51018180f4913-01`
 
 该值的格式是：
 
