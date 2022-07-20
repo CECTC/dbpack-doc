@@ -1,6 +1,6 @@
 # DBPack
 
-## [中文](../README.md) | English
+## [中文](/README) | English
 
 <img src="https://cectc.github.io/dbpack-doc/images/dbpack.svg" alt="image-20220427091848831" />
 
