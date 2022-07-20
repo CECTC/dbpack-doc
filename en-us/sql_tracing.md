@@ -35,4 +35,4 @@ trace:
 
 Following picture shows some example data of the tracing chain of an integrated distributed transaction, you can see what SQL been executed by DBPack on which DB, and the execution time:
 
-<img src="/images/image-20220719145659901.png" alt="image-20220719145659901" style="width:1000px" />
+<img src="https://cectc.github.io/dbpack-doc/images/image-20220719145659901.png" alt="image-20220719145659901" style="width:1000px" />
