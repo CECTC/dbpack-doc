@@ -1,6 +1,6 @@
 # Health Status
 
-> DBPack prodvides `/live` API to check its life status, and `/ready` API to check if it's ready to serve. When all the `DataSource` can be successfully pinged, `/ready` API response HTTP status code 200. DBPack also provides `/status` API to check DBPack status, and `/metrics` API to check DBPack running metrics.
+> DBPack provides `/live` API to check its life status, and `/ready` API to check if it's ready to serve. When all the `DataSource` can be successfully pinged, `/ready` API response HTTP status code 200. DBPack also provides `/status` API to check DBPack status, and `/metrics` API to check DBPack running metrics.
 
 + `/status` API
 
