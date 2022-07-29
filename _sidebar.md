@@ -4,7 +4,7 @@
 - [架构原理](architecture.md)
 - [健康状态](health_status.md)
 - [分布式事务](distributed_transaction.md)
-  - [AT 模式](dbpack_at.md)
+  - [EAT 模式](dbpack_eat.md)
   - [TCC 模式](dbpack_tcc.md)
   - [samples](distributed_transaction_samples.md)
 - [读写分离](read_write_splitting.md)

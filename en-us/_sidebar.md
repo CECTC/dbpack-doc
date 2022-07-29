@@ -4,7 +4,7 @@
 - [Architecture](/en-us/architecture.md)
 - [Health Status](/en-us/health_status.md)
 - [Distributed Transaction](/en-us/distributed_transaction.md)
-    - [AT mode](/en-us/dbpack_at.md)
+    - [EAT mode](/en-us/dbpack_eat.md)
     - [TCC mode](/en-us/dbpack_tcc.md)
     - [Demo](/en-us/distributed_transaction_samples.md)
 - [Read Write Splitting](/en-us/read_write_splitting.md)

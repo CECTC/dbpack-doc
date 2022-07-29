@@ -1,10 +1,26 @@
 # 分布式事务
 
-> DBPack 分布式事务支持 AT 模式和 TCC 模式。AT 模式支持自动生成 SQL 补偿语句，对数据库操作进行回滚；TCC 模式支持对拦截到的 HTTP1  请求自动调用提交、回滚接口协调分布式事务。
+> DBPack 分布式事务支持 EAT (Event Driven Automatic Transaction) 模式和 TCC (Try Confirm Cancel) 模式。EAT 模式支持自动生成 SQL 补偿语句，对数据库操作进行回滚；TCC 模式支持对拦截到的 HTTP1  请求自动调用提交、回滚接口协调分布式事务。
 
 ## 原理
 
-DBPack AT 模式和 TCC 模式的分布式解决方案都基于两阶段提交 (2PC: tow phase commit) 理论。分布式事务问题的解决方案有多种，除了本项目中的 AT 模式、TCC 模式，还有 XA 协议方案、SAGA 模式方案、最终一致性方案等。各公司应该根据自己的技术栈、研发能力、业务场景等情况选择适合自己的解决方案。
+DBPack EAT 模式和 TCC 模式的分布式解决方案都基于两阶段提交 (2PC: tow phase commit) 理论。分布式事务问题的解决方案有多种，除了本项目中的 EAT 模式、TCC 模式，还有 XA 协议方案、SAGA 模式方案、最终一致性方案等。各公司应该根据自己的技术栈、研发能力、业务场景等情况选择适合自己的解决方案。
+
+### EAT 模式
+
+两阶段提交：
+
+- 一阶段：业务数据和 UndoLog 在同一本地事务中提交。
+- 二阶段：
+  - 异步提交回滚
+  - 回滚通过一阶段的 UndoLog 进行反向补偿。
+
+### TCC 模式
+
+- 一阶段 prepare 预留资源
+- 二阶段 commit 或 rollback。
+
+EAT 采用 UndoLog 反向生成 SQL 补偿。TCC 属于业务补偿。
 
 
 
@@ -12,7 +28,7 @@ DBPack AT 模式和 TCC 模式的分布式解决方案都基于两阶段提交 (
 
 测试环境：2018 款 mac book pro
 
-测试模式：AT 模式
+测试模式：EAT 模式
 
 seata-golang 性能：
 
