@@ -1,10 +1,10 @@
 # Distributed Transaction
 
-> DBPack supports both AT and TCC mode. For AT mode, it will generate compensated SQL and automatically rollback the branch transaction in case global transaction rollback. For TCC mode, it will intercept HTTP1 request and coordinate distributed transaction by calling commit or rollback API automatically.
+> DBPack supports both EAT(Event Driven Automatic Transaction) and TCC(Try Confirm Cancel) mode. For EAT mode, it will generate compensated SQL and automatically rollback the branch transaction in case global transaction rollback. For TCC mode, it will intercept HTTP1 request and coordinate distributed transaction by calling commit or rollback API automatically.
 
 ## Theory
 
-Both the AT and TCC distributed transaction are based on 2PC (tow phase commit) theory. There are many solutions for distributed transaction, besides AT mode, TCC mode, there are XA mode, SAGA mode, eventual consistency solution and so on. Companies should select suitable solutions according to their technic stack, development capacity, business scenario...etc.
+Both the EAT and TCC distributed transaction are based on 2PC (tow phase commit) theory. There are many solutions for distributed transaction, besides EAT mode, TCC mode, there are XA mode, SAGA mode, eventual consistency solution and so on. Companies should select suitable solutions according to their technic stack, development capacity, business scenario...etc.
 
 
 

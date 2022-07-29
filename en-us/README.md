@@ -8,13 +8,14 @@
 
 ## Features
 
-+ support MYSQL protocol
-+ simple and easy to use to handle distributed transaction
++ support MYSQL protocol.
++ event driven distributed transaction solution inspired by kubernetes.
 + support read && write splitting, customized SQL route through `Hint`
++ support audit log, support sql tracing.
++ sharding: support query on sharded table, support order by，support limit.
++ sharding: support insert、delete、update on sharded table
 + can be deployed as a sidecar, so that any programming language can use it to handle distributed transaction
-+ automatically route SQL to shardings and DB, support `order by` and `limit` statement
-+ automatically calculate sharding for SQL query
-+ more features are coming soon
++ more features on the road
 
 ## Prerequisites
 

@@ -16,6 +16,12 @@ listeners:
     config:
       # http 监听器代理的后端服务的地址
       backend_host: localhost:3000
+      # header size, int 类型，默认 4096
+      read_buffer_size: 8192
+      # response size, int 类型，默认 4096
+      write_buffer_size: 8192
+      # max request body size, int 类型，默认 4 * 1024 * 1024
+      max_request_body_size: 8388608
     filters:
       - httpDtFilter
   # 监听的协议类型

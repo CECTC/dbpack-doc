@@ -1,4 +1,134 @@
-# AT 模式
+# EAT 模式
+
+## 一、UndoLog
+
+我们会在 SQL 执行时记录 UndoLog。在全局事务提交时异步删除 UndoLog；在全局事务回滚时异步执行 SQL 补偿语句回滚数据。
+
+下面以 departments 表为例，说明 UndoLog 的生成逻辑。departments 表结构如下：
+
+```sql
+CREATE TABLE `departments` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `dept_no` char(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dept_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dept_name` (`dept_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+假如应用执行了如下的 SQL：
+
+```sql
+update departments set dept_name = 'moonlight' where dept_name = 'sunset';
+```
+
+DBPack 会在这个 SQL 执行之前，解析这个 SQL 语句，查询前镜像：
+
+```sql
+select id, dept_no, dept_name from departments where dept_name = 'sunset';
+```
+
+获取到的前镜像如下：
+
+| id   | dept_no | dept_name |
+| ---- | ------- | --------- |
+| 230  | 1001    | sunset    |
+
+执行业务 SQL，该 department 的名字被更新为 `moonlight`，执行后，根据前镜像的主键获取后镜像：
+
+```sql
+select id, dept_no, dept_name from departments where id = 230
+```
+
+获取到的后镜像为：
+
+| id   | dept_no | dept_name |
+| ---- | ------- | --------- |
+| 230  | 1001    | moonlight |
+
+将前后镜像序列化后，形成下列数据结构：
+
+```json
+{
+	"is_binary": true,
+	"sql_type": "UPDATE",
+	"schema_name": "employees",
+	"table_name": "departments",
+	"lock_key": "departments:230",
+	"after_image": {
+		"rows": [{
+			"fields": [{
+        "key_type": "pk",
+				"name": "id",
+				"type": 4,
+				"value": 230
+			}, {
+				"name": "dept_no",
+				"type": 12,
+				"value": "1001"
+			}, {
+				"name": "dept_name",
+				"type": 12,
+				"value": "moonlight"
+			}]
+		}],
+		"table_name": "departments"
+	},
+	"before_image": {
+		"rows": [{
+			"fields": [{
+        "key_type": "pk",
+				"name": "id",
+				"type": 4,
+				"value": 230
+			}, {
+				"name": "dept_no",
+				"type": 12,
+				"value": "1001"
+			}, {
+				"name": "dept_name",
+				"type": 12,
+				"value": "sunset"
+			}]
+		}],
+		"table_name": "departments"
+	},
+}
+```
+
+这里为了展示方便使用了 Json 结构展示，在 DBPack 中，UndoLog 通过 Protobuffer 序列化。
+
+
+
+## 二、SQL 补偿
+
++ INSERT 操作
+
+  通过 UndoLog 构造 DELETE 补偿语句。
+
+  ```sql
+  DELETE FROM {table_name} WHERE id = ?
+  ```
+
++ DELETE 操作
+
+  通过 UndoLog 构造 INSERT 补偿语句。
+
+  ```sql
+  INSERT INTO {table_name} ({columns}) VALUES ({values})
+  ```
+
++ UPDATE 操作
+
+  通过 UndoLog 构造 UPDATE 补偿语句。
+
+  ```
+  UPDATE {table_name} SET {columns} = {values} WHERE id = ?
+  ```
+
+
+
+## 三、流程
 
 <img src="./images/distributed-transaction.gif" alt="image-20220427100734991" style="zoom:67%;" />
 
