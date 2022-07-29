@@ -58,7 +58,7 @@ select id, dept_no, dept_name from departments where id = 230
 	"after_image": {
 		"rows": [{
 			"fields": [{
-        "key_type": "pk",
+				"key_type": "pk",
 				"name": "id",
 				"type": 4,
 				"value": 230
@@ -77,7 +77,7 @@ select id, dept_no, dept_name from departments where id = 230
 	"before_image": {
 		"rows": [{
 			"fields": [{
-        "key_type": "pk",
+				"key_type": "pk",
 				"name": "id",
 				"type": 4,
 				"value": 230
