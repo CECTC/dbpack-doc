@@ -1,6 +1,6 @@
 # Encryption & Decryption
 
-DBPack supports automatic encryption and decryption for sensitive data. DBPack uses AES algorithm to encrypt data, for example, when inserting and updating data, DBPack will automatically encrypt certain fields. If there are certian encrypted fields when querying from DB, DBPack will automatically decrypt them. Currently, encrypted fields are not allowed to be `WHERE` conditions.
+DBPack supports automatic encryption and decryption for sensitive data. DBPack uses AES algorithm to encrypt data, for example, when inserting and updating data, DBPack will automatically encrypt certain fields. If there are certain encrypted fields when querying from DB, DBPack will automatically decrypt them. Currently, encrypted fields are not allowed to be `WHERE` conditions.
 
 You can enable encryption and decryption by adding `CryptoFilter` configuration. For example: 
 
