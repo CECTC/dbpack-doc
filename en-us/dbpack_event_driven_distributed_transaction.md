@@ -1,5 +1,134 @@
 # EAT Mode
 
+## 1. UndoLog
+
+When DBPack is executing SQL, it will store the UndoLog of the SQL operation. The UndoLog will be removed asynchronously in case global transaction commit. In case global transaction rollback, the UndoLog will be executed asynchronously to compensate for the branch transaction.  
+
+We can take following `departments` table for example, to illustrate the logic of generating UndoLog.   
+
+```sql
+CREATE TABLE `departments` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `dept_no` char(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dept_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dept_name` (`dept_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+Suppose the application wants to execute bellow business SQL:
+
+```sql
+update departments set dept_name = 'moonlight' where dept_name = 'sunset';
+```
+
+DBPack will parse the SQL and get the `before image` of it, before above SQL been executed.
+
+```sql
+select id, dept_no, dept_name from departments where dept_name = 'sunset';
+```
+
+The obtained `before image` is like following:
+
+| id   | dept_no | dept_name |
+| ---- | ------- | --------- |
+| 230  | 1001    | sunset    |
+
+After the business SQL been executed, the `department` name will be updated to `moonlight`, then we can get the `after image` via the primary key of `before image`.
+
+```sql
+select id, dept_no, dept_name from departments where id = 230;
+```
+
+The obtained `after image` is like following:
+
+| id   | dept_no | dept_name |
+| ---- | ------- | --------- |
+| 230  | 1001    | moonlight |
+
+After `before image` and `after image` been serialized, we can get following data structure of UndoLog: 
+
+```json
+{
+	"is_binary": true,
+	"sql_type": "UPDATE",
+	"schema_name": "employees",
+	"table_name": "departments",
+	"lock_key": "departments:230",
+	"after_image": {
+		"rows": [{
+			"fields": [{
+				"key_type": "pk",
+				"name": "id",
+				"type": 4,
+				"value": 230
+			}, {
+				"name": "dept_no",
+				"type": 12,
+				"value": "1001"
+			}, {
+				"name": "dept_name",
+				"type": 12,
+				"value": "moonlight"
+			}]
+		}],
+		"table_name": "departments"
+	},
+	"before_image": {
+		"rows": [{
+			"fields": [{
+				"key_type": "pk",
+				"name": "id",
+				"type": 4,
+				"value": 230
+			}, {
+				"name": "dept_no",
+				"type": 12,
+				"value": "1001"
+			}, {
+				"name": "dept_name",
+				"type": 12,
+				"value": "sunset"
+			}]
+		}],
+		"table_name": "departments"
+	}
+}
+```
+
+We use Json data structure to display for convenient purpose. In DBpack, the UndoLog is serialized by Proto Buffer.
+
+
+## 2. SQL Compensation
+
++ INSERT Operation
+
+  Create DELETE compensation SQL through UndoLog
+
+  ```sql
+  DELETE FROM {table_name} WHERE id = ?
+  ```
+
++ DELETE operation
+
+  Create INSERT compensation SQL through UndoLog
+
+  ```sql
+  INSERT INTO {table_name} ({columns}) VALUES ({values})
+  ```
+
++ UPDATE operation
+
+  Create UPDATE compensation SQL through UndoLog
+
+  ```
+  UPDATE {table_name} SET {columns} = {values} WHERE id = ?
+  ```
+
+
+
+## 3. Process Flow
+
 <img src="https://cectc.github.io/dbpack-doc/images/distributed-transaction-en.gif" alt="image-20220427100734991" style="zoom:67%;" />
 
 + After the request been sent to the aggregation service, the ETCD will write global transaction data, and the unique mark xid is generated. （example: gs/aggregationSvc/2612341069705662465）。
