@@ -39,7 +39,7 @@ trace:
 
 下图展示了一个完整分布式事务的 trace 链路数据，可以看到通过 DBPack 在哪个 DB 上执行了什么 SQL 请求，以及耗时：
 
-<img src="/Users/scottlewis/dksl/cestc/dbpack.github.io/images/image-20220719145659901.png" alt="image-20220719145659901" style="width:1000px" />
+<img src="../images/image-20220719145659901.png" alt="image-20220719145659901" style="width:1000px" />
 
 ## 数据加密
 
