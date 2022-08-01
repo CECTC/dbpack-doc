@@ -1,6 +1,6 @@
 # SQL Tracing
 
-For the global services that started by DBPack proxy, the HTTP headers `traceparent` will be automatically injected.  The `traceparent` value format is:
+For the global transaction that started by DBPack proxy, the HTTP headers `traceparent` will be automatically injected.  The `traceparent` value format is:
 
 `00-85d85c3112590a76d0723eed4326dbd8-81e51018180f4913-01`
 
