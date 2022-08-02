@@ -12,15 +12,15 @@ DBPack EAT 模式和 TCC 模式的分布式解决方案都基于两阶段提交 
 
 - 一阶段：业务数据和 UndoLog 在同一本地事务中提交。
 - 二阶段：
-  - 异步提交回滚
-  - 回滚通过一阶段的 UndoLog 进行反向补偿。
+  - 异步提交: 删除UndoLog。
+  - 异步回滚：通过一阶段的 UndoLog 进行反向补偿。
 
 ### TCC 模式
 
 - 一阶段 prepare 预留资源
 - 二阶段 commit 或 rollback。
 
-EAT 采用 UndoLog 反向生成 SQL 补偿。TCC 属于业务补偿。
+EAT 采用 UndoLog 自动反向生成 SQL 补偿，而TCC 则属于业务补偿，需要手动补偿业务。
 
 
 

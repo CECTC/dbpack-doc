@@ -16,7 +16,7 @@ CREATE TABLE `departments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 
-假如应用执行了如下的 SQL：
+假如应用想执行如下的业务 SQL：
 
 ```sql
 update departments set dept_name = 'moonlight' where dept_name = 'sunset';
@@ -37,7 +37,7 @@ select id, dept_no, dept_name from departments where dept_name = 'sunset';
 执行业务 SQL，该 department 的名字被更新为 `moonlight`，执行后，根据前镜像的主键获取后镜像：
 
 ```sql
-select id, dept_no, dept_name from departments where id = 230
+select id, dept_no, dept_name from departments where id = 230;
 ```
 
 获取到的后镜像为：
@@ -46,7 +46,7 @@ select id, dept_no, dept_name from departments where id = 230
 | ---- | ------- | --------- |
 | 230  | 1001    | moonlight |
 
-将前后镜像序列化后，形成下列数据结构：
+将前后镜像序列化后，形成下列 UndoLog 数据结构：
 
 ```json
 {
@@ -92,11 +92,11 @@ select id, dept_no, dept_name from departments where id = 230
 			}]
 		}],
 		"table_name": "departments"
-	},
+	}
 }
 ```
 
-这里为了展示方便使用了 Json 结构展示，在 DBPack 中，UndoLog 通过 Protobuffer 序列化。
+这里为了展示方便使用了 Json 结构展示，在 DBPack 中，UndoLog 通过 Proto Buffer 序列化。
 
 
 

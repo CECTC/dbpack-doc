@@ -1,18 +1,33 @@
 # Distributed Transaction
 
-> DBPack supports both EAT(Event Driven Automatic Transaction) and TCC(Try Confirm Cancel) mode. For EAT mode, it will generate compensated SQL and automatically rollback the branch transaction in case global transaction rollback. For TCC mode, it will intercept HTTP1 request and coordinate distributed transaction by calling commit or rollback API automatically.
+> DBPack supports both EAT (Event Driven Automatic Transaction) and TCC (Try Confirm Cancel) mode. For EAT mode, it will generate compensated SQL and automatically rollback the branch transaction in case global transaction rollback. For TCC mode, it will intercept HTTP1 request and coordinate distributed transaction by calling commit or rollback API automatically.
 
 ## Theory
 
 Both the EAT and TCC distributed transaction are based on 2PC (tow phase commit) theory. There are many solutions for distributed transaction, besides EAT mode, TCC mode, there are XA mode, SAGA mode, eventual consistency solution and so on. Companies should select suitable solutions according to their technic stack, development capacity, business scenario...etc.
 
+### EAT mode
+
+Two-Phase-Commit:
+
+- Phase 1: business SQL and UndoLog been committed in the same local transaction.
+- Phase 2:
+    - commit asynchronously: delete the UndoLog.
+    - rollback asynchronously: compensate the business SQL by executing the UndoLog.
+
+### TCC mode
+
+- Phase 1: prepare reserved resource.
+- Phase 2: commit or rollback.
+
+EAT mode generates compensated SQL via UndoLog automatically, whereas the TCC mode is type of business compensation and needs manual compensation.
 
 
 ## Performance Testing
 
 Testing Environment: MacBook Pro 2018
 
-Testing mode: AT
+Testing mode: EAT
 
 Seata-golang Performance:
 
