@@ -22,7 +22,7 @@ ApplicationID -> IP -> Port -> 连接
 
 ### 2、TC Server 高可用带来的问题
 
-<img src="https://cectc.github.io/dbpack-doc/images/image-20220803100437384.png" alt="image-20220803100437384" style="zoom:30%;" />
+<img src="https://cectc.github.io/dbpack-doc/images/image-20220803100437384.png" alt="image-20220803100437384" width="300px" />
 
 TC Server 为了做到高可用，将状态数据持久化到 MySQL 或者 Redis。TC Server 本身无状态，这样可以部署多个 TC Server 实现 TC Server 的高可用，但 MySQL、Redis 的高可用需要其他方法去保证。
 
