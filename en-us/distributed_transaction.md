@@ -13,7 +13,7 @@ Two-Phase-Commit:
 - Phase 1: business SQL and UndoLog been committed in the same local transaction.
 - Phase 2:
     - commit asynchronously: delete the UndoLog.
-    - rollback asynchronously: compensate the business SQL by executing the UndoLog.
+    - rollback asynchronously: compensate the business SQL by recovering the "before image" using the UndoLog.
 
 ### TCC mode
 
