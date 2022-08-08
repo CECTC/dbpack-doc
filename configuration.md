@@ -196,7 +196,6 @@ data_source_cluster:
 
 ```yaml
 distributed_transaction:
-  appid: svc
   // 回滚最大重试时间，单位毫秒，即超过该设置声明的时间，相应的事务分支不再回滚，该时间可根据业务自身的特性动态调整。
   retry_dead_threshold: 130000
   // 是否允许回滚超时后释放全局锁，如果相应资源数据一直被锁住，再修改该数据则不被允许，建议设置为 true，即回滚超时后释放全局锁。
