@@ -29,16 +29,16 @@ type DBPackConfig struct {
 The structure of the configuration file is:
 
 ```yaml
-# 默认 18888
+# default is 18888
 probe_port: 9999
-# 如果开启链路追踪功能，需配置 tracer
+# If the tracing function is enabled, you need to configure tracer
 tracer:
-  # 当前支持将 tracing 信息输出到 jaeger
+  # Currently supports outputting tracing information to jaeger
   jaeger_endpoint: http://jaeger:14268/api/traces
-# 默认 3s
+# default is 3s
 termination_drain_duration: 3s
 app_config:
-  # orderSvc 表示 appid，您可使用您自己的 appid 替换它
+  # orderSvc means appid, replace with your own appid
   orderSvc:
     listeners:
     [ - <listener config> - ]
