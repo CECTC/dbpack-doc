@@ -2,6 +2,58 @@
 
 > The configuration of DBPack draws on the idea from Kubernetes: everything is resource! The listener is a resource, the data source of the physical DB is a resource, and the filter is also a resource. All the resources are combined by the name index.
 
+When DBPack starts, you can specify a configuration file through `--config` or `-c`, the default is `config.yaml`. The code structure of the configuration is:
+
+```golang
+type Configuration struct {
+	ProbePort                int           `default:"18888" yaml:"probe_port" json:"probe_port"`
+	Tracer                   *TracerConfig `yaml:"tracer" json:"tracer"`
+	TerminationDrainDuration time.Duration `default:"3s" yaml:"termination_drain_duration" json:"termination_drain_duration"`
+
+	AppConfig AppConfig `yaml:"app_config" json:"app_config"`
+}
+
+type AppConfig map[string]*DBPackConfig
+
+type DBPackConfig struct {
+	AppID                  string                  `yaml:"-" json:"-"`
+	DistributedTransaction *DistributedTransaction `yaml:"distributed_transaction" json:"distributed_transaction"`
+
+	Listeners   []*Listener   `yaml:"listeners" json:"listeners"`
+	Executors   []*Executor   `yaml:"executors" json:"executors"`
+	DataSources []*DataSource `yaml:"data_source_cluster" json:"data_source_cluster"`
+	Filters     []*Filter     `yaml:"filters" json:"filters"`
+}
+```
+
+The structure of the configuration file is:
+
+```yaml
+# 默认 18888
+probe_port: 9999
+# 如果开启链路追踪功能，需配置 tracer
+tracer:
+  # 当前支持将 tracing 信息输出到 jaeger
+  jaeger_endpoint: http://jaeger:14268/api/traces
+# 默认 3s
+termination_drain_duration: 3s
+app_config:
+  # orderSvc 表示 appid，您可使用您自己的 appid 替换它
+  orderSvc:
+    listeners:
+    [ - <listener config> - ]
+    executors:
+    [ - <executor config> - ]
+    data_source_cluster:
+    [ - <data source config> - ]
+    filters:
+    [ - <filter config> - ]
+    distributed_transaction:
+    [ - <distributed transaction config> - ]
+```
+
+
+
 ## 1、Listener
 
 ```yaml
