@@ -10,3 +10,4 @@
   + [DBPack 读写分离功能发布公告](blogs/release-v0.2.0.md)
   + [DBPack SQL Tracing 功能及数据加密功能详解](blogs/release-v0.3.0.md)
   + [分布式事务框架的演进](blogs/distributed_transaction.md)
+  + [DBPack 限流熔断功能发布说明](blogs/release-v0.4.0.md)
