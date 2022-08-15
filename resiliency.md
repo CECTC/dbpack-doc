@@ -50,7 +50,7 @@ DBPack 限流熔断功能通过 filter 实现。要设置限流规则，首先�
           error_threshold: 20
           # success 次数
           success_threshold: 5
-          // seconds
+          # seconds
           timeout: 60
 ```
 
