@@ -12,5 +12,6 @@
 - [审计日志](audit_log.md)
 - [链路追踪](sql_tracing.md)
 - [数据加解密](crypto.md)
+- [限流熔断](resiliency.md)
 - [贡献者](contributor.md)
 

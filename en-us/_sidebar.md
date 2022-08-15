@@ -12,4 +12,5 @@
 - [Audit Log](/en-us/audit_log.md)
 - [SQL Tracing](/en-us/sql_tracing.md)
 - [Encryption & Decryption](/en-us/crypto.md)
+- [resiliency](/en-us/resiliency.md)
 - [Contributors](/en-us/contributor.md)
