@@ -8,7 +8,7 @@ The SQL request passed to DBPack, will be transformed into AST abstract syntax t
 
 ### WHERE Condition Pre-Process
 
-1.  function pre-calculation
+1. Function pre-calculation
 
 - SELECT 1 + 1 ,  will be optimized to: SELECT 2
 
@@ -16,15 +16,15 @@ The SQL request passed to DBPack, will be transformed into AST abstract syntax t
 
 - SELECT 0 = 1 ,  will be optimized to: SELECT 0
 
-- string functions:
+- String functions:
 
   ```LENGTH、CHAR_LENGTH、CHARACTER_LENGTH、CONCAT、CONCAT_WS、LEFT、LOWER、LPAD、LTRIM、REPEAT、REPLACE、REVERSE、RIGHT、RPAD、RTRIM、SPACE、STRCMP、SUBSTRING、UPPER```
 
-- mathematics functions:
+- Mathematics functions:
 
   ```ABS、CELL、EXP、FLOOR、MOD、PI、POW、POWER、RAND、ROUND、SIGN、SQRT```
 
-- datetime functions:
+- Datetime functions:
 
   ```ADDDATE、CURDATE、CURRENT_DATE、CURRENT_TIMESTAMP、CURTIME、DATEDIFF、DATE_FORMAT、DAY、DAYNAME、DAYOFMONTH、DAYOFWEEK、DAYOFYEAR、FROM_UNIXTIME、HOUR、LOCALTIME、MINUTE、MONTHNAME、MONTH、NOW、QUARTER、SECOND、SUBDATE、SYSDATE、UNIX_TIMESTAMP```
 
@@ -50,7 +50,7 @@ SELECT film_id, title, rental_rate, rental_duration FROM film_0 WHERE rental_dur
 
 We can get correct query result by executing above SQL.
 
-2. optimize ture / false checking
+2. Optimize ture / false checking
 
 For example:
 
@@ -62,9 +62,9 @@ For example:
 
 **TrueCondition indicates full table scanning; FalseCondition indicates that there is no sharding result for this SQL, in other words, empty result**
 
-3. smartly merging and/or query
+3. Smartly merging and/or query
 
-some cases:
+Some case examples:
 
 - 1 < A <= 10  AND 2 <= A < 11,  will be optimized to: 2 <= A <= 10
 - 1 < A  AND A < 0  ,  will be optimized to: FalseCondition
@@ -223,7 +223,7 @@ INSERT INTO city_5(name,country_code,district,population,id) VALUES ('´s-Hertog
 
 ### shadow table
 
-shadow table configuration:
+Shadow table configuration:
 
 ```yaml
 executors:
@@ -281,14 +281,14 @@ INSERT INTO pt_city_0 (`id`, `name`, `country_code`, `district`, `population`) V
 
 #### expression rules of shadow table
 
-1. string match:
+1. String match:
 
 - `matches` (regex match)
 - `contains` (string contains)
 - `startsWith` (has prefix)
 - `endsWith` (has suffix)
 
-for example:
+For example:
 
 ```yaml
 column: brand
@@ -297,7 +297,7 @@ expr: "%s matches \"h.*\""
 
 When the value of branch is `hermes`, the matching result of the expression is `true`, and the request will be routed to the shadow table.
 
-another example:
+Another example:
 
 ```yml
 column: madein
@@ -306,7 +306,7 @@ expr: "%s contains \"china\""
 
 When the value of madein is `china sichuan`, the matching result of the expression is `true`, and the request will be routed to the shadow table.
 
-2. for numeric types, it supports some basic operations:
+2. For numeric types, it supports some basic operations:
 
 - `+` (addition)
 - `-` (subtraction)
@@ -315,7 +315,7 @@ When the value of madein is `china sichuan`, the matching result of the expressi
 - `%` (modulus)
 - `^` or `**` (exponent)
 
-for example:
+For example:
 
 ```yaml
 column: userid
@@ -324,7 +324,7 @@ expr: "%s % 10 == 1"
 
 When userid value is 1689391, the matching result of the expression is `true`, and the request will be routed to the shadow table.
 
-3. comparison operators:
+3. Comparison operators:
 
 - `==` (equal)
 - `!=` (not equal)
