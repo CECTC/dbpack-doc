@@ -135,7 +135,7 @@ world_0: city_0, city_1, city_2, city_3, city_4
 world_1: city_5, city_6, city_7, city_8, city_9 
 ```
 
-根据上述拓扑，计算分片时，只需计算出表分片，即可知请求落在哪个 DB 分片。DBPack 现支持两种分片算法，分别是 `NumberMod` 取模分片、`NumberRange` 范围分片。上面的配置描述了 `NumberMod` 算法如何配置，`NumberRange` 需要额外的参数描述分片健的分布：
+根据上述拓扑，计算分片时，只需计算出表分片，即可知请求落在哪个 DB 分片。DBPack 现支持两种分片算法，分别是 `NumberMod` 取模分片、`NumberRange` 范围分片。上面的配置描述了 `NumberMod` 算法如何配置，`NumberRange` 需要额外的参数描述分片键的分布：
 
 ```yaml
 sharding_rule:
@@ -154,7 +154,7 @@ sharding_rule:
      "9": "4500-5000"
 ```
 
-在描述分片健的范围时，可以使用 `K`、`M` 分别表示千、万，比如：0-1000K，1000K-2000K，2000M-3000M。
+在描述分片键的范围时，可以使用 `K`、`M` 分别表示千、万，比如：0-1000K，1000K-2000K，2000M-3000M。
 
 ### 自动生成主键
 
@@ -196,7 +196,7 @@ logic_tables:
       # 号段步长, default 1000
       step: 1000
       # 数据库连接配置
-      dsn: dsn: root:123456@tcp(dbpack-mysql1:3306)/world
+      dsn: root:123456@tcp(dbpack-mysql1:3306)/world
 ```
 
 该算法主键从 10000 起，一次取 1000 个主键放入缓存中，供业务使用。
