@@ -207,7 +207,7 @@ When using automatic primary key generation, if the primary key is not explicitl
 INSERT INTO city (`id`, `name`, `country_code`, `district`, `population`) VALUES (10001, '´s-Hertogenbosch', 'NLD', 'Noord-Brabant', 129170);
 ```
 
-If the above request has specified a primary key, the primary key will not be generated.
+The above request has specified a primary key, the primary key will not be generated.
 
 ```sql
 INSERT INTO city (`name`, `country_code`, `district`, `population`) VALUES ('´s-Hertogenbosch', 'NLD', 'Noord-Brabant', 129170);
