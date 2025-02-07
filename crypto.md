@@ -20,7 +20,10 @@ filters:
       - table: departments
         columns: ["dept_name"]
         aeskey: 123456789abcdefg
+        cryptoType: aesgcm
 ```
+
+根据需要对指定表，指定列进行加密。`aeskey` 为加密密钥，`cryptoType` 为支持的加解密类型。目前支持AES和国密SM4算法，结合不同的加密模式组成以下加解密类型：`aesgcm`, `aescbc`, `aesecb`, `aescfb`, `sm4gcm`, `sm4ecb`, `sm4cbc`, `sm4cfb`, `sm4ofb`。
 
 上面的配置表示需要对 `departments` 表的 `dept_name` 列进行自动加解密。
 

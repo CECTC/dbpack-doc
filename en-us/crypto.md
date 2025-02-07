@@ -22,6 +22,8 @@ filters:
         aeskey: 123456789abcdefg
 ```
 
+Encrypt the specified table and column as needed. `aeskey` is the encryption key, and `cryptoType` is the supported encryption and decryption type. Currently, AES and SM4 algorithms are supported, and the following encryption and decryption types are formed by combining different encryption modes: `aesgcm`, `aescbc`, `aesecb`, `aescfb`, `sm4gcm`, `sm4ecb`, `sm4cbc`, `sm4cfb`, `sm4ofb`.
+
 Above configuration aims to enable automatic encryption and decryption for `dept_name` column of `departments` table.
 
 + Insert operation:
